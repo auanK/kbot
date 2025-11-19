@@ -139,4 +139,4 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*\
 
 # Baileys Authentication files
-baileys_auth_info
+baileys_auth_info/

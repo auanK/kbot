@@ -1,7 +1,6 @@
 import fs from 'fs/promises';
 import { URL } from 'url';
 import { startWhatsapp } from './services/whatsapp.js';
-import { onMessage } from './events/onMessage.js';
 
 async function loadCommands() {
   const commands = new Map();
@@ -29,19 +28,17 @@ async function loadCommands() {
 }
 
 async function main() {
-  console.log('Iniciando o bot...');
-
-  const sock = await startWhatsapp();
-  const context = {
-    sock: sock,
-  };
-
   const commands = await loadCommands();
-  sock.context = context;
 
-  sock.ev.on('messages.upsert', (m) => {
-    onMessage(m, context, commands);
-  });
+  await startWhatsapp(commands);
 }
+
+process.on('uncaughtException', (err) => {
+  console.error('Erro Crítico:', err);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Rejeição de Promessa:', reason);
+});
 
 main();
