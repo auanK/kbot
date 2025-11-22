@@ -140,3 +140,8 @@ vite.config.ts.timestamp-*\
 
 # Baileys Authentication files
 baileys_auth_info/
+
+seed.js
+database.sqlite
+seed.js
+.DS_Store
